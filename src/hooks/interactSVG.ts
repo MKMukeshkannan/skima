@@ -2,6 +2,8 @@ import { useRef } from "react";
 
 export function useSVG() {
   const svgRef = useRef<SVGSVGElement | null>(null);
+  const height = window.innerHeight;
+  const width = window.innerWidth;
 
   function setSVGRef(ref: SVGSVGElement) {
     if (!ref) return;
@@ -43,7 +45,7 @@ export function useSVG() {
 
   let isPointerDown = false;
   let originPointer = { x: 0, y: 0 };
-  let viewBox = { x: 0, y: 0, width: 500, height: 500 };
+  let viewBox = { x: 0, y: 0, width, height };
   let newViewBox = { x: 0, y: 0 };
 
   function onPointerDown(e: any) {
@@ -79,5 +81,5 @@ export function useSVG() {
     viewBox.y = newViewBox.y;
   }
 
-  return { setSVGRef };
+  return { setSVGRef, height, width };
 }
